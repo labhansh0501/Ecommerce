@@ -1,1 +1,115 @@
 @import "../../../css-config/mixins.scss";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,100&family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
+
+
+.hero-banner {
+    padding: 40px 0;
+    position: relative;
+    background-image: linear-gradient(to right, #bf40e6, #4a00e0);
+    @include md {
+        height: calc(100vh - 80px);
+    }
+
+    .content {
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-direction: column-reverse;
+        max-width: calc(100% - 20px);
+        margin: 0 auto;
+        position: relative;
+        @include md {
+            flex-direction: row;
+            max-width: 1200px;
+        }
+        .banner-img {
+            position: relative;
+            z-index: 9;
+            width: 200px;
+            margin-bottom: 20px;
+            @include md {
+                width: 500px;
+                margin-right: 60px;
+                margin-top: 50px;
+                margin-bottom: 0;
+            }
+            @include xxl {
+                width: 600px;
+                margin-right: 0px;
+                margin-top: 0px;
+            }
+
+            animation: BannerImg  0.7s linear infinite alternate;
+        }
+
+        .text-content {
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            @include md {
+                position: absolute;
+                left: 50px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            @include xxl {
+                left: 0;
+            }
+            h1 {
+                font-family: 'Roboto' , sans-serif;
+                font-size: 80px;
+                font-weight: 700;
+                line-height: 1;
+                margin-bottom: 20px;
+                @include md {
+                    font-size: 180px;
+                }
+            }
+            
+            p {
+                font-family: 'Roboto', sans-serif;
+                max-width: 300px;
+                font-size: 14px;
+                line-height: 20px;
+                margin-bottom: 20px;
+                @include md {
+                    max-width: 500px;
+                    font-size: 18px;
+                    line-height: 24px;
+                    margin-bottom: 40px;
+                }
+            }
+            .ctas {
+                display: flex;
+                justify-content :center;
+                gap: 20px;
+                    .banner-cta {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        text-transform: uppercase;
+                        font-size: 13px;
+                        font-weight: 500;
+                        border: 2px solid white;
+                        padding: 10px 20px;
+                        cursor: pointer;
+                        &.v2 {
+                            background-color: white;
+                            color: black;
+                        }
+
+                        &:hover {
+                            opacity: 0.6;
+                        }
+                }
+            }
+        }
+    }
+}
+
+@keyframes BannerImg {
+    to {
+        transform: translateY(-10px);
+    }
+}
