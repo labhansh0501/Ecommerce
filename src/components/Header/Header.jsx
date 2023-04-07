@@ -1,6 +1,6 @@
 import { useEffect, useState, UseContext } from "react";
 import { useNavigate , Link } from "react-router-dom";
-import {HashLink} from "react-router-hash-link"
+// import {HashLink} from "react-router-hash-link"
 
 import { TbSearch } from "react-icons/tb";
 import { CgShoppingCart } from "react-icons/cg";
