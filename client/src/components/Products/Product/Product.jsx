@@ -4,15 +4,15 @@ import prod from "../../../assets/products/earbuds-prod-1.webp";
 
 
 
-const Product = () => {
+const Product = ({id, data}) => {
     return (
         <div className="product-card">
             <div className="thumbnail">
-                <img src={prod}  alt="" />
+                <img src={process.env.REACT_APP_DEV_URL + data.img.data[0].attributes.url}  alt="" />
             </div>
             <div className="prod-details">
-                <div className="name">ProductName</div>
-                <div className="price">&#8377;4999</div>
+                <div className="name">{data.title}</div>
+                <div className="price">&#8377;{data.price}</div>
             </div>
         </div>
     );
