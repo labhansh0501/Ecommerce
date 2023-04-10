@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const params = {
-    header: {
-        Authorization: "bearer" + ProcessingInstruction.env.REACT_APP_STRIPE_APP_KEY,
+    headers: {
+        Authorization: "bearer " + process.env.REACT_APP_STRIPE_APP_KEY,
     },
 };
 
-export const fetchDataFromApi = async () => {
+export const fetchDataFromApi = async (url) => {
     try {
         const {data} = await axios.get(
            process.env.REACT_APP_DEV_URL + url, 
