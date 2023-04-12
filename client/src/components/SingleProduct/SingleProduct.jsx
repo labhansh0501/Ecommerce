@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import RelatedProducts from "./RelatedProducts/RelatedProducts";
 import {
   FaFacebookF,
@@ -14,11 +14,13 @@ import "./SingleProduct.scss";
 
 import useFetch from "../../Hooks/useFetch";
 import { useParams } from "react-router-dom";
+import { Context } from "../../utils/context";
 
 const SingleProduct = () => {
-  const [quantity,  setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const { data } = useFetch(`/api/products?populate=*&[filters] [id]=${id}`);
+  const { handleAddToCart} = useContext(Context)
 
   const increment = () => {
     setQuantity((prevState) => prevState + 1);
@@ -26,11 +28,10 @@ const SingleProduct = () => {
 
   const decrement = () => {
     setQuantity((prevState) => {
-        if(prevState === 1) return 1;
-        return prevState - 1;
+      if (prevState === 1) return 1;
+      return prevState - 1;
     });
   };
-
 
   if (!data) return;
   const product = data.data[0].attributes;
@@ -58,7 +59,10 @@ const SingleProduct = () => {
                 <span>{quantity}</span>
                 <span onClick={increment}>+</span>
               </div>
-              <button className="add-to-cart-button">
+              <button className="add-to-cart-button" onClick={() => {
+                handleAddToCart(data.data[0], quantity)
+                setQuantity(1);
+              }}>
                 <FaCartPlus size={20} />
                 ADD TO CART
               </button>
@@ -74,7 +78,7 @@ const SingleProduct = () => {
               <span className="text-bold">
                 Share:
                 <span className="social-icons">
-                  <FaFacebookF size={16} /> 
+                  <FaFacebookF size={16} />
                   <FaTwitter size={16} />
                   <FaInstagram size={16} />
                   <FaLinkedin size={16} />
@@ -84,7 +88,10 @@ const SingleProduct = () => {
             </div>
           </div>
         </div>
-        <RelatedProducts />
+        <RelatedProducts
+          productId={id}
+          categoryId={product.categories.data[0].id}
+        />
       </div>
     </div>
   );
